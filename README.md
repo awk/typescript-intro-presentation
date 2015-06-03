@@ -1,6 +1,8 @@
 # Introduction to TypeScript Presentation
 
-Slides for a tech talk I presented on Friday 12/10/2012 titled "TypeScript: JavaScript for tools" as one of the primary design goals for the language is to provided development tooling support.
+Slides for a presentation at Boston AngularJS Meetup on June 17 2015: An Intro to Typescript with AngularJS. 
+
+The slides are based on a tech talk Ben Smith presented on Friday 12/10/2012 titled "TypeScript: JavaScript for tools" (http://github.com/slashdotdash/typescript-intro-presentation)
 
 Created using the wonderful [deck.js](http://imakewebthings.com/deck.js/) for building HTML presentations. Styling has been gratuitously borrowed from [www.typescriptlang.org](http://www.typescriptlang.org/).
 
@@ -17,14 +19,15 @@ Feel free to copy the source and/or content of these slides for your own use (at
 * Declaration Source Files
 * Type Annotations
 * Types
-* Arrow Function Expressions
 * Classes
 * Interfaces
-* Structural Types
 * Modules
+* Structural Types
+* Arrow Function Expressions
 * Source File Dependencies
 * Source Map Support
-* Self Hosting
+* Tools
 * Why use TypeScript?
 * Why not?
+* What about Angular2?
 * Resources

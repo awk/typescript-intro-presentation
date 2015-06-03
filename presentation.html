@@ -6,10 +6,10 @@
   <meta name="viewport" content="width=1024, user-scalable=no">
 
   <title>TypeScript: JavaScript for tools</title>
-  
+
   <!-- Required stylesheet -->
   <link rel="stylesheet" href="deck.js/core/deck.core.css">
-  
+
   <!-- Extension CSS files go here. Remove or add as needed. -->
   <link rel="stylesheet" href="deck.js/extensions/goto/deck.goto.css">
   <link rel="stylesheet" href="deck.js/extensions/menu/deck.menu.css">
@@ -19,10 +19,10 @@
   <link rel="stylesheet" href="deck.js/extensions/scale/deck.scale.css">
 
   <link rel="stylesheet" href="assets/typescript.css">
-  
+
   <!-- Transition theme. More available in /themes/transition/ or create your own. -->
   <link rel="stylesheet" href="deck.js/themes/transition/horizontal-slide.css">
-  
+
   <!-- Required Modernizr file -->
   <script src="deck.js/modernizr.custom.js"></script>
 </head>
@@ -33,13 +33,14 @@
 <section class="slide" id="intro">
   <div><hgroup>
     <h1>TypeScript</h1>
-    <h2>JavaScript for tools</h2>
-	
-	<h3>Ben Smith <a href="mailto:ben@10consulting.com">ben@10consulting.com</a></h3>
+    <h2>TypeScript and AngularJS 1.x</h2>
+
+	<h3>Andrew Kimpton<a href="mailto:awk@onshape.com">awk@onshape.com</a></h3>
+    <h3>@awk</h3>
   </hgroup></div>
 </section>
 
-<section class="slide"> 
+<section class="slide">
   <blockquote cite="http://www.typescriptlang.org/">
     <p>TypeScript is a language for application-scale JavaScript development.</p><br />
     <p>TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.</p><br />
@@ -48,14 +49,14 @@
   </blockquote>
 </section>
 
-<section class="slide"> 
+<section class="slide">
   <h2>Design Goals</h2>
-  <ul>    
+  <ul>
     <li>Extend JavaScript for writing large apps (superset of JavaScript).</li>
     <li>Adds support for classes, interfaces &amp; modules.</li>
     <li>Development tooling support</li>
     <li>Compiled JavaScript runs in any browser (or Node.js).</li>
-    <li>Since JavaScript code is TypeScript code you can start off with JavaScript and just add some types here and there.</li>   
+    <li>Since JavaScript code is TypeScript code you can start off with JavaScript and just add some types here and there.</li>
   </ul>
 </section>
 
@@ -66,33 +67,30 @@
   </blockquote>
 </section>
 
-<section class="slide"> 
+<section class="slide">
   <h2>Tooling Support</h2>
-  <ul>    
+  <ul>
     <li>Static type checking.</li>
     <li>Strong type inference.</li>
     <li>Symbol-based navigation.</li>
     <li>Statement completion / intellisense.</li>
     <li>Code refactoring.</li>
   </ul>
-  <p>Currently supported in <strong>Visual Studio 2012</strong> 
+  <p>Supported in <strong>WebStorm</strong>, <strong>Eclipse</strong>, <strong>Visual Studio 2012</strong>
     and Microsoft's <strong>Monaco</strong> web editor (TypeScript.org playground).</p>
-  <p>Also, text editor support for Sublime Text, EMACS, Vim.</p>
+  <p>Also, text editor support for Atom, Sublime Text, EMACS, Vim.</p>
 </section>
 
 <section class="slide">
   <h2>Installation</h2>
-  <h3>Visual Studio 2012</h3>
-  <p>Plugin <a href="http://www.microsoft.com/en-us/download/details.aspx?id=34790">available to download</a>.</p>
-  
-  <h3>Node.js</h3>  
+  <h3>Node.js</h3>
   <pre><code>npm install -g typescript</code></pre>
-  
+
   <p>Provides a command-line compiler.</p>
   <pre><code>tsc source.ts</code></pre>
 </section>
 
-<section class="slide"> 
+<section class="slide">
   <h2>File Extensions</h2>
   <ul>
     <li><code>.ts</code> is the extension for source files.</li>
@@ -100,30 +98,29 @@
   </ul>
 </section>
 
-<section class="slide">  
+<section class="slide">
   <h2>Declaration Source Files</h2>
   <ul>
     <li>Provide type definitions, separate from the corresponding source.</li>
     <li>Analogous to header files in C/C++..</li>
     <li>Can be used to describe the exported virtual TypeScript types of a JavaScript library or module when a third-party developer consumes it from TypeScript.</li>
-    <li>Gives type safety, intellisense and compile errors.</li>
-    <li>DOM and jQuery provided with TypeScript.</li>
+    <li>Gives type safety, auto-completion and compile errors.</li>
+    <li>.d.ts files for libraries (including Angular 1.x) available from <a href="http://definitelytyped.org">http://definitelytyped.org</a></li>
     <li>Write your own for any existing JavaScript library / code.</li>
   </ul>
 </section>
 
-<section class="slide"> 
+<section class="slide">
   <h2>Type Annotations</h2>
   <ul>
     <li>Optional static typing.</li>
     <li>Lightweight way to record the intended contract of a function or variable.</li>
     <li>Applied using a <em>post-fix</em> syntax.</li>
-    <li>Ideally suited to when the <code>: T</code> is optional.</li>
   </ul>
 
   <pre><code>function add(a: number, b: number) {
     return a + b;
-}</pre></code>
+}</code></pre>
 
   <ul>
     <li>Return type of the function can be inferred.</li>
@@ -134,7 +131,7 @@
 <section class="slide">
   <h2>Types</h2>
   <ul>
-    <li>All types are subtypes of a single top type called the <code>Any</code> type.</li>
+    <li>All types are subtypes of a single top type called the <code>any</code> type.</li>
     <li>Represents any JavaScript value with no constraints.</li>
   </ul>
 
@@ -144,45 +141,20 @@
     <li><code>bool</code></li>
     <li><code>string</code></li>
     <li><code>null</code></li>
-    <li><code>undefined</code></li>    
+    <li><code>undefined</code></li>
   </ul>
 
   <h3>Object Types</h3>
   <ul>
     <li>Class, module, interface and literal types.</li>
     <li>Supports typed arrays: <code>var reports: Employee[] = [];</code></li>
-  </ul>  
-</section>
-
-<section class="slide"> 
-  <h2>Arrow Function Expressions</h2>
-  <ul>
-    <li>New feature planned for ECMAScript 6.</li>
-    <li>Compact form of function expressions that omit the function keyword.</li>
-    <li>Similar to lambda expressions in C#.</li>
-    <li>Lexical scoping of <code>this</code>.</li>    
+    <li>Supports generics: <code>function identity&lt;T&gt;(arg: T): T { return arg; }</code></li>
   </ul>
-
-  <div class="slide">
-    <pre><code>var messenger = { 
-  message: "Hello World", 
-  start: function() { 
-    setTimeout(() => { alert(this.message); }, 3000); 
-  } 
-}; 
-messenger.start();</pre></code>
-  </div>
-  
-  <div class="slide">
-    <pre><code>window.onmousemove = e => {
-  console.log('Mouse at ('+e.screenX+','+e.screenY+')');
-}</pre></code>
-  </div>
 </section>
 
-<section class="slide"> 
+<section class="slide">
   <h2>Classes</h2>
-  <ul>    
+  <ul>
     <li>Support for ECMAScript 6 alike classes.</li>
     <li>Methods are translated into JavaScript prototype chain - more memory efficient than using closures with anonymous functions.</li>
     <li><code>public</code> or <code>private</code> member accessibility.</li>
@@ -194,31 +166,37 @@ messenger.start();</pre></code>
 
 <section class="slide">
   <h2>Classes</h2>
-  <pre><code class="typescript">class Animal {
-    constructor(public name) { }
-    move(meters) {
-        alert(this.name + " moved " + meters + "m.");
-    }
+  <pre><code class="typescript">export class TodoItem {
+    constructor(
+      public title: string,
+      public completed: boolean
+    ) { }
 }
-
-class Snake extends Animal {
-  move() {
-    alert("Slithering...");
-    super.move(5);
-  }
-}
-
-class Horse extends Animal {
-  move() {
-    alert("Galloping...");
-    super.move(45);
-  }
-}</pre></code>
+  </code></pre>
 </section>
 
-<section class="slide"> 
+<section class="slide">
+  <h2>Classes</h2>
+  <pre><code class="typescript">class TodoCtrl {
+  // @ngInject
+  constructor(private $location: ng.ILocationService, private todoStorage: ITodoStorage) {
+    this.todos = todoStorage.get();
+    if ($location.path() === '') $location.path('/');
+  }
+
+  public removeTodo(todoItem: TodoItem) {
+    this.todos.splice(this.todos.indexOf(todoItem), 1);
+  }
+
+  public clearDoneTodos() {
+    this.todos = this.todos.filter(todoItem => !todoItem.completed);
+  }
+}</code></pre>
+</section>
+
+<section class="slide">
   <h2>Interfaces</h2>
-  <ul>    
+  <ul>
     <li>Designed for development tooling support only.</li>
     <li>No output when compiled to JavaScript.</li>
     <li>Structural type system - interfaces are automatically implemented by any object/prototype that complies structurally.</li>
@@ -230,99 +208,105 @@ class Horse extends Animal {
 
 <section class="slide">
   <h2>Interfaces</h2>
-  <pre><code class="typescript">interface Drivable {
-    start(): void;
-    drive(distance: number): void;
-    getPosition(): number;
+  <pre><code class="typescript">interface ITodoStorage {
+  get (): TodoItem[];
+  put(todos: TodoItem[]);
 }
 
-class Car implements Drivable {
-  private isRunning: bool = false;
-  private distanceFromStart: number;
-  
-  public start(): void {
-    this.isRunning = true;
+class TodoStorage implements ITodoStorage {
+  STORAGE_ID = 'todos-angularjs-typescript';
+  get (): TodoItem[] {
+    return JSON.parse(localStorage.getItem(this.STORAGE_ID) || '[]');
   }
-  public drive(distance: number): void {
-    if (this.isRunning) {
-      this.distanceFromStart += distance;           
-    }        
+
+  put(todos: TodoItem[]) {
+    localStorage.setItem(this.STORAGE_ID, JSON.stringify(todos));
   }
-  public getPosition(): number {
-    return this.distanceFromStart;
-  }
-}</pre></code>
+}</code></pre>
 <p><strong>Note</strong> interfaces have no <em>run-time</em> representation - they are purely a <em>compile-time</em> construct.</p>
 </section>
 
 <section class="slide">
-  <h2>Structual Types</h2>
-  <pre><code class="typescript">interface Person {
-    firstname: string;
-    lastname: string;
-}
-
-function greeter(person: Person) {
-    return "Hello, " + person.firstname + " " + person.lastname;
-}
-
-var user = {firstname: "Jane", lastname: "User"};
-
-greeter(user);</pre></code>
-  <p><strong>Note</strong> that strutural typing also applies to interface methods.</p>
-</section>
-
-<section class="slide"> 
   <h2>Modules</h2>
   <ul>
-    <li>Analagous to .NET namespaces.</li>
+    <li><strong>NOT</strong> Angular modules - though they can be a part of an ng module</li>
     <li>Prevents global variable naming collisions.</li>
     <li>Closely aligned with those proposed for ECMAScript 6.</li>
     <li>Supports code generation targeting CommonJS and AMD module systems.</li>
     <li>Accessibility for <code>internal</code> and <code>external</code> modules.</li>
     <li>Allows exposing a <em>public</em> API.</li>
-  </ul>  
+  </ul>
 </section>
 
 <section class="slide">
   <h2>Modules</h2>
-  <pre><code class="typescript">interface IPoint {
-    getDist(): number;
+  <pre><code>module todos {
+
+  var todomvc = angular.module('todomvc', [])
+    .controller('todoCtrl', TodoCtrl)
+    .service('todoStorage', TodoStorage);
 }
-
-module Shapes {
-  // Class exported for public consumption
-  export class Point implements IPoint {
-      // Constructor
-      constructor (public x: number, public y: number) { }
-
-      // Instance member
-      getDist() { return Math.sqrt(this.x * this.x + this.y * this.y); }
-
-      // Static member
-      static origin = new Point(0, 0);
-  }
-}
-var p: IPoint = new Shapes.Point(3, 4);
-var dist = p.getDist();</pre></code>
+</code></pre>
+  <pre><code>&lt;html lang="en" ng-app="todomvc"&gt;</code></pre>
 </section>
 
-<section class="slide"> 
+<section class="slide">
+  <h2>Structural Types</h2>
+  <pre><code>class TodoItem {
+  public title: string,
+  public completed: boolean
+}
+
+function isDone(todo: TodoItem) {
+  return todo.title + todo.completed ? " is done" : " is unfinished";
+}
+
+var task = {title: "Write some typescript", complete: false};
+
+isDone(task);</code></pre>
+  <p><strong>Note</strong> that structural typing also applies to interface methods.</p>
+</section>
+
+<section class="slide">
+  <h2>Arrow Function Expressions</h2>
+  <ul>
+    <li>New language feature for ECMAScript 6.</li>
+    <li>Compact form of function expressions that omit the function keyword.</li>
+    <li>Lexical scoping of <code>this</code>.</li>
+  </ul>
+
+  <div class="slide">
+    <pre><code>// @ngInject
+function todoFocus($timeout: ng.ITimeoutService): ng.IDirective {
+  return {
+    link: ($scope: ng.IScope, element: JQuery, attributes: any) => {
+      $scope.$watch(attributes.todoFocus, newval => {
+      if (newval) {
+        $timeout(() => element[0].focus(), 0, false);
+      }
+    });
+    }
+  };
+}</code></pre>
+  </div>
+</section>
+
+<section class="slide">
   <h2>Source File Dependencies</h2>
   <ul>
     <li>Compiler automatically determines a source file's dependencies.</li>
     <li>Uses <em>reference comments</em> and <code>import</code> declarations.</li>
     <li>All references are analysed for their dependencies.</li>
-    <li>Visual Studio uses these references to load all associated source files from a single <code>.ts</code> file.</li>
+    <li>Developer Tools use these references to load all associated source files from a single <code>.ts</code> file.</li>
   </ul>
 
   <div class="slide">
     <h4>Reference comment</h4>
-    <pre><code>/// &lt;reference path="jquery.d.ts"/&gt;</code></pre>
+    <pre><code>/// &lt;reference path="typings/angularjs/angular.d.ts"/&gt;</code></pre>
 
     <h4>Import declaration</h4>
-    <pre><code>import log = module("log"); 
-log.message("hello");</pre></code>
+    <pre><code>import log = module("log");
+log.message("hello");</code></pre>
   </div>
 </section>
 
@@ -338,124 +322,103 @@ log.message("hello");</pre></code>
   </ul>
 
   <pre><code>tsc -sourcemap example.ts</code></pre>
-
-  <ul>
-    <li>Requires either Chrome Canary or WebKit nightly.</li>
-    <li>Not yet supported by Visual Studio 2012.</li>
-    <li>... but available via <a href="http://visualstudiogallery.msdn.microsoft.com/07d54d12-7133-4e15-becb-6f451ea3bea6">Web Essentials 2012</a> plugin.</a>  
-  </ul>
-
-  <h3 class="slide">Demo</h3>
 </section>
 
-<section class="slide">  
-  <h2>Self hosting</h2>
+<section class="slide">
+  <h2>Tools for your pipeline</h2>
   <ul>
-    <li>Compiler is written in TypeScript, so can compile itself to JavaScript.</li>
-    <li>Can be hosted in any ECMAScript 3 compatible runtime.</li>
-    <li>Can host the compiler in a web browser by referencing <code>typescript.js</code></li>
+    <li><code>tsc</code> - command line typescript compiler</li>
+    <li><code>tsd</code> - search/fetch/update .d.ts files from DefinitelyTyped</li>
+    <li><code>grunt-ts</code> <code>grunt-typescript</code> - grunt plugins for typescript compilation</li>
+    <li><code>grunt-ng-annotate</code> - add <em>$inject</em> statements per <em>@ngInject</em> comments</li>
+    <li>generator-angular &amp; generator-karma</li>
   </ul>
 </section>
 
 <section class="slide">
-  <h2>Hosting TypeScript Compiler</h2>
-
-  <h3>1. Create an html file with a reference to <code>typescript.js</code> file.</h3>
-  
-  <pre><code>&lt;script type="text/javascript" src="typescript.js"&gt;&lt;/script&gt;</pre></code>
-</section>
-
-<!-- TODO: Replace  in-place instructions for hosting -->
-<section class="slide">
-  <h3>2. Create an output writer</h3>
-  <pre><code>var outfile = {
-    source: "",
-    Write: function (s) {
-        this.source += s;
-    },
-    WriteLine: function (s) {
-        this.source += s + "\n";
-    },
-    Close: function () { }
-};</pre></code>
-</section>
-
-<section class="slide">
-  <h3>3. Create an instance of the TypeScript compiler</h3>
-  <pre><code>var compiler = new TypeScript.TypeScriptCompiler(outfile);</pre></code>
-  <h3>... with compilation error handling.</h3>
-  <pre><code>compiler.parser.errorRecovery = true;
-compiler.setErrorCallback(function (start, len, message, block) {
-    console.log('Compilation error: ', message, '\n Code block: ', block, ' Start position: ', start, ' Length: ', len);
-});</code></pre>
-</section>
-
-<section class="slide">
-  <h3>4. Add compilation source.</h3>
-  <pre><code>var src = $('#source').text();
-compiler.addUnit(src, '');</pre></code>
-
-  <h3>... and standard lib file.</h3>
-  <pre><code>// libfile variable contains packed declaration file lib.d.ts
-compiler.addUnit(libfile, 'lib.d.ts');</pre></code>
-</section>
-
-<section class="slide">
-  <h3>5. Compile.</h3>
-  <pre><code>compiler.typeCheck();
-
-compiler.emit(false, function createFile(fileName) {
-    console.log(outfile);
-    return outfile;
-});
-
-console.log('compiled: ' + outfile.source);</pre></code>
-
-<h3 class="slide">Demo</h3>
-</section>
-
-<section class="slide"> 
   <h2>Why use TypeScript?</h2>
   <ul>
-    <li>Support for ECMAScript 6 constructs (classes, modules) 
-      in today's ECMAScript 3 compatible browsers.</li>   
-    <li>Open Source, under the Apache 2.0 license, and available to download on codeplex.</li>
+    <li>Support for ECMAScript 6 constructs (classes, modules)
+      in today's ECMAScript 3 & 5 compatible browsers.</li>
     <li>Tooling support, for type safety, inference and refactoring.</li>
-    <li>Static types and compilation helps catch mistakes &amp; bugs earlier.</li> 
+    <li>Static types and compilation helps catch mistakes &amp; bugs earlier.</li>
     <li>Structural interfaces &amp; typing.</li>
-    <li>Simplicity of design, self hosting (less than 25k LoC).</li>
     <li>Works well with existing projects.</li>
-    <li>Compiles to <em>idiomatic</em> JavaScript.</li>    
-    <li>Anders Hejlsburg is involved.</li>
-    <li>Enables programming in the large.</li>    
+    <li>Compiles to <em>idiomatic</em> JavaScript.</li>
+    <li>Enables programming in the large.</li>
+    <li>Headstart on Typescript with Angular 2.0</li>
   </ul>
 </section>
 
-<section class="slide"> 
+<section class="slide">
   <h2>Why not?</h2>
   <ul>
     <li>Additional <em>compilation</em> step for JavaScript development.</li>
-    <li>Only at version 0.8</li>
-	<li>Bugs, for example implementing an interface ignores the access modifiers when compiling, but fails at runtime.</li>
-    <li>Limited availability of resources &amp; libraries 
-      (can use any existing JavaScript, albeit with limited type saftey and tooling support).</li>
-    <li>No support for generics (yet, but is defined in spec).</li>
-    <li>All types are nullable.</li>
-    <li>Limited tooling support outside of Visual Studio 2012 or Monaco web editor.</li>    
+    <li>Limited (but improving) availability of resources &amp; libraries
+      (can use any existing JavaScript, albeit with limited type safety and tooling support).</li>
   </ul>
 </section>
 
 <section class="slide">
   <blockquote>
     <p>Static typing does confer some very relevant value.</p>
-    <p>Typically it does so at the cost of flexibility, but this brings a lot of the benefits to JavaScript in an optional way, which is very powerful.</p>    
+    <p>Typically it does so at the cost of flexibility, but this brings a lot of the benefits to JavaScript in an optional way, which is very powerful.</p>
   </blockquote>
+</section>
+
+<section class="slide">
+  <h2>What about Angular2?</h2>
+  <ul>
+    <li>Uses TypeScript 1.5 (currently beta) - which supports '@' annotations</li>
+    <li><code>import</code> definitions for angular (or other) components</li>
+    <li>Annotate classes and methods to add functionality</li>
+  </ul>
+</section>
+
+<section class="slide">
+    <pre><code>/// &lt;reference path="../typings/angular2/angular2.d.ts" /&gt;
+import {Component, View, bootstrap, NgFor} from 'angular2/angular2';
+import {RouteConfig, RouterOutlet, RouterLink, routerInjectables} from 'angular2/router';
+
+import {Home} from './components/home/home';
+import {About} from './components/about/about';
+
+@Component({
+  selector: 'app'
+})
+@RouteConfig([
+  { path: '/', component: Home, as: 'home' },
+  { path: '/about', component: About, as: 'about' }
+])
+@View({
+  templateUrl: './app.html',
+  directives: [RouterOutlet, RouterLink]
+})
+class App {}</code></pre>
+</section>
+
+<section class="slide">
+  <h2>What do the annotations do?</h2>
+  <ul>
+    <li>Defined in angular2.d.ts file, implemented in the angular library</li>
+    <li>Just functions, that take some arguments and return a function that is passed the annotated item (class, method etc.)</li>
+    <li>Like annotations in Java - potentially very powerful (but beware young padawan!)</li>
+  </ul>
+  <pre><code>function View(arg: _ViewArg): (target: any) => any;
+interface _ViewArg {
+  templateUrl?: string;
+  template?: string;
+  directives?: List&lt;Type&gt;;
+}</code></pre>
 </section>
 
 <section class="slide">
   <h2>Resources</h2>
   <ul>
     <li><a href="http://www.typescriptlang.org/">typescriptlang.org</a></li>
+    <li><a href="http://definitelytyped.org">definitelytyped.org</a></li>
+    <li><a href="https://github.com/tastejs/todomvc/tree/gh-pages/examples/typescript-angular">ToDo MVC Angular &amp; Typescript Example</a></li>
+    <li><a href="https://github.com/mgechev/angular2-seed">Angular2 Seed Project</a></li>
     <li>Watch Anders introduce TypeScript in the <a href="http://channel9.msdn.com/posts/Anders-Hejlsberg-Introducing-TypeScript">Channel 9 videos</a></li>
     <li><a href="http://go.microsoft.com/fwlink/?LinkId=267238">Read</a> the specification.</li>
   </ul>
@@ -469,7 +432,7 @@ console.log('compiled: ' + outfile.source);</pre></code>
 
 <!-- deck.navigation snippet
 <a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
-<a href="#" class="deck-next-link" title="Next">&#8594;</a> 
+<a href="#" class="deck-next-link" title="Next">&#8594;</a>
 -->
 
 <!-- deck.status snippet -->
@@ -537,8 +500,8 @@ console.log('compiled: ' + outfile.source);</pre></code>
         event.preventDefault();
         return false;
       } else if (goingForwards == true && tsCode.not(':hidden').length > 0) {
-        var src = tsCode.map(function() { 
-          return $(this).text(); 
+        var src = tsCode.map(function() {
+          return $(this).text();
         }).get().join('\n');
         // Conpile TypeScript to JavaScript
 
