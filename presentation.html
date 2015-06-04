@@ -35,7 +35,7 @@
     <h1>TypeScript</h1>
     <h2>TypeScript and AngularJS</h2>
 
-	<h3>Andrew Kimpton<a href="mailto:awk@onshape.com">awk@onshape.com</a></h3>
+	<h3>Andrew Kimpton<a href="mailto:awk@onshape.com"> awk@onshape.com</a></h3>
     <h3>@awk</h3>
   </hgroup></div>
 </section>
@@ -54,7 +54,6 @@
   <ul>
     <li>Extend JavaScript for writing large apps (superset of JavaScript).</li>
     <li>Adds support for classes, interfaces &amp; modules.</li>
-    <li>Development tooling support</li>
     <li>Compiled JavaScript runs in any browser (or Node.js).</li>
     <li>Since JavaScript code is TypeScript code you can start off with JavaScript and just add some types here and there.</li>
   </ul>
@@ -63,12 +62,12 @@
 <section class="slide">
   <blockquote>
     <p>What TypeScript does is, it basically formalizes a static type system that describes JavaScript's dynamic types, but it describes them at development time.</p>
-    <p><cite>Anders Hejlsberg</cite></p>
+    <p><cite>Anders Hejlsberg - Microsoft</cite></p>
   </blockquote>
 </section>
 
 <section class="slide">
-  <h2>Tooling Support</h2>
+  <h2>Developer Environment</h2>
   <ul>
     <li>Static type checking.</li>
     <li>Strong type inference.</li>
@@ -138,7 +137,7 @@
   <h3>Primitive Types</h3>
   <ul>
     <li><code>number</code></li>
-    <li><code>bool</code></li>
+    <li><code>boolean</code></li>
     <li><code>string</code></li>
     <li><code>null</code></li>
     <li><code>undefined</code></li>
@@ -239,18 +238,6 @@ class TodoStorage implements ITodoStorage {
 </section>
 
 <section class="slide">
-  <h2>Modules</h2>
-  <pre><code>module todos {
-
-  var todomvc = angular.module('todomvc', [])
-    .controller('todoCtrl', TodoCtrl)
-    .service('todoStorage', TodoStorage);
-}
-</code></pre>
-  <pre><code>&lt;html lang="en" ng-app="todomvc"&gt;</code></pre>
-</section>
-
-<section class="slide">
   <h2>Structural Types</h2>
   <pre><code>class TodoItem {
   public title: string,
@@ -261,7 +248,7 @@ function isDone(todo: TodoItem) {
   return todo.title + todo.completed ? " is done" : " is unfinished";
 }
 
-var task = {title: "Write some typescript", complete: false};
+var task = {title: "Write some typescript", completed: false};
 
 isDone(task);</code></pre>
   <p><strong>Note</strong> that structural typing also applies to interface methods.</p>
@@ -272,23 +259,52 @@ isDone(task);</code></pre>
   <ul>
     <li>New language feature for ECMAScript 6.</li>
     <li>Compact form of function expressions that omit the function keyword.</li>
-    <li>Lexical scoping of <code>this</code>.</li>
   </ul>
 
   <div class="slide">
-    <pre><code>// @ngInject
-function todoFocus($timeout: ng.ITimeoutService): ng.IDirective {
+    <pre><code>function todoBlur(): ng.IDirective {
   return {
     link: ($scope: ng.IScope, element: JQuery, attributes: any) => {
-      $scope.$watch(attributes.todoFocus, newval => {
-        if (newval) {
-          $timeout(() => element[0].focus(), 0, false);
-        }
+      element.bind('blur', () => { $scope.$apply(attributes.todoBlur); });
+      $scope.$on('$destroy', () => { element.unbind('blur'); });
+    }
+  };
+}</code></pre>
+  </div>
+  <div class="slide">
+    <pre><code>function todoBlur() {
+  return {
+    link: function ($scope, element, attributes) {
+      element.bind('blur', function () {
+        $scope.$apply(attributes.todoBlur);
+      });
+      $scope.$on('$destroy', function () {
+        element.unbind('blur');
       });
     }
   };
 }</code></pre>
   </div>
+</section>
+
+<section class="slide">
+  <h2>Arrow Function Expressions</h2>
+  <ul>
+    <li>Lexical scoping of <code>this</code>.</li>
+  </ul>
+
+    <pre><code>function onLoaded() {
+  var self = this;
+  $timeout(function() {
+    self.showMessage("Time's Up!");
+  }, 10000);
+}</code></pre>
+
+    <pre><code class="typescript">function onLoaded() {
+  $timeout(()=> {
+    this.showMessage("Time's Up!");
+  }, 10000);
+}</code></pre>
 </section>
 
 <section class="slide">
@@ -363,8 +379,8 @@ log.message("hello");</code></pre>
 <section class="slide">
   <blockquote>
     <p>Static typing does confer some very relevant value.</p>
-    <p>Typically it does so at the cost of flexibility, but this brings a lot of the benefits to JavaScript in an optional way, which is very powerful.</p>
-    <p><cite>Isaac Schlueter</cite></p>
+    <p>Typically it does so at the cost of flexibility, but TypeScript brings a lot of the benefits to JavaScript in an optional way, which is very powerful.</p>
+    <p><cite>Isaac Schlueter - npm Inc.</cite></p>
   </blockquote>
 </section>
 
@@ -403,15 +419,10 @@ class App {}</code></pre>
   <h2>What do the annotations do?</h2>
   <ul>
     <li>Defined in angular2.d.ts file, implemented in the angular library</li>
-    <li>Just functions, that take some arguments and return a function that is passed the annotated item (class, method etc.)</li>
+    <li>Just functions (or classes), that take some arguments and do 'a thing'</li>
+    <li>'a thing' could be inserting a class, or adding methods to the target</li>
     <li>Like annotations in Java - potentially very powerful (but beware young padawan!)</li>
   </ul>
-  <pre><code>function View(arg: _ViewArg): (target: any) => any;
-interface _ViewArg {
-  templateUrl?: string;
-  template?: string;
-  directives?: List&lt;Type&gt;;
-}</code></pre>
 </section>
 
 <section class="slide">
